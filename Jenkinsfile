@@ -37,6 +37,10 @@ pipeline {
                 echo 'Run integration tests on staging'
             }
         }
-
+        stage('Deploy to Production') {
+            steps {
+                echo 'Deploy to production server'
+            }
+        }
     }
 }
