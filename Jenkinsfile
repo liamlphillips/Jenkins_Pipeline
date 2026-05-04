@@ -38,10 +38,5 @@ pipeline {
             }
         }
 
-        stage('Deploy to Production') {
-            steps {
-                echo 'Deploy to production server'
-            }
-        }
     }
 }
