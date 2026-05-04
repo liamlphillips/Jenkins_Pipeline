@@ -24,6 +24,26 @@ pipeline {
             steps {
                 echo 'Scan using OWASP ZAP'
             }
+
+            post {
+                success {
+                    emailext(
+                        to: 'liam.lphillips@gmail.com',
+                        subject: 'Security scan complete',
+                        body: 'The security scan completed successfully. Check the attached logs.',
+                        attachLog: true
+                    )
+                }
+
+                failure {
+                    emailext(
+                        to: 'liam.lphillips@gmail.com',
+                        subject: 'Security scan failed',
+                        body: 'The security scan failed. Check the attached logs.',
+                        attachLog: true
+                    )
+                }
+            }
         }
 
         stage('Deploy to Staging') {
@@ -37,6 +57,7 @@ pipeline {
                 echo 'Run integration tests on staging'
             }
         }
+
         stage('Deploy to Production') {
             steps {
                 echo 'Deploy to production server'
